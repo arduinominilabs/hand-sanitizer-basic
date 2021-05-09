@@ -1,0 +1,48 @@
+/* Dosificador Gel
+   Ejemplo básico prueba
+*/
+
+#include <Servo.h>
+
+const int irPin = 3;     // pin D3 nano
+const int servoPin=2;    //pin D2 nano
+
+int irDetection = 0;         // variable for reading the pushbutton status
+int pos1=180;                // gira antihorario
+int pos2=0;                  // gira horario
+int pos3=90;                 // se detiene
+int tiempo1=1500;              //tiempo de giro, se supone que 500 da 1 vueltas y es acerca de 10 mm.
+int tiempo2=1100;               //retraso un poco la vuelta para que el servo no ceda
+
+Servo myservo;  // create servo object to control a servo
+// twelve servo objects can be created on most boards
+
+
+void setup() {
+  myservo.attach(7);     // attaches the servo on to the servo object pin 7 arduino
+  pinMode(irPin, INPUT); // initialize the pushbutton pin as an input:
+  
+}
+
+void loop() {
+  
+   irDetection = digitalRead(irPin); // read the state of the pushbutton value:
+      
+   if (irDetection==LOW)            //detecto con LOW
+   {
+   
+    myservo.write(pos2);
+    delay(tiempo1);
+    myservo.write(pos1);
+    delay(tiempo2);
+    myservo.write(pos3);
+    delay(100);
+   
+   }
+  
+   
+}
+
+
+
+  
